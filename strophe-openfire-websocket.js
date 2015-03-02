@@ -30,6 +30,15 @@
  *  Returns:
  *    A new Openfire object.
  */
+
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
  
 Openfire.Connection = function(url) 
 {
@@ -47,7 +56,7 @@ Openfire.Connection = function(url)
     
     this.url = url;
     this.jid = "";
-    this.resource = "ofchat";
+    this.resource = guid();
     this.streamId = null;
 
     // handler lists
