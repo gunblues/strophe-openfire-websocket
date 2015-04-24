@@ -1,5 +1,6 @@
 # strophe-openfire-websocket
 Use strophe to connect nginx or haproxy websocket proxy (openfire3.9.3)
+Recommand using haproxy as websocket proxy because it sometimes happens "Connection reset by peer" in nginx and then connection become unavailiable, especially lots of concurrent connections or large data transfer
 
 Especially thanks to Dele Olajide for developing the project (https://code.google.com/p/openfire-websockets/)
 
