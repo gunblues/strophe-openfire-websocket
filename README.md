@@ -7,8 +7,8 @@ Especially thanks to Dele Olajide for developing the project (https://code.googl
 
 ## Installation
 ####Server Side (openfire): 
-* If you use Openfire 3.10, download websockets.war here and put it to your openfire plugin directory
-* If you use Openfire 3.9.3 download websocket plugin (websockets-0.0.0.6.zip, https://code.google.com/p/openfire-websockets/downloads/list) and unzip file to your openfire plugin directory
+* If you use Openfire 3.10, download websockets.war (I rebuild the plugin source within openfire 3.10 source) here and put it to your openfire plugin directory
+* If you use Openfire 3.9.3, download websocket plugin (websockets-0.0.0.6.zip, https://code.google.com/p/openfire-websockets/downloads/list) and unzip file to your openfire plugin directory
 * Restart openfire server
 * Visit openfire admin site and select the tab "Server" and you should see the child tab "WebSockets" and the default "Web Application Name" is ws
 
