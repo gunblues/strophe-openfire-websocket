@@ -70,6 +70,7 @@ public final class XMPPServlet extends WebSocketServlet
 
 	@Override public void configure(WebSocketServletFactory factory)
 	{
+        //set websocket idle timeout 30000
 		factory.getPolicy().setIdleTimeout(30000);
 		factory.setCreator(new WSocketCreator());
 	}
