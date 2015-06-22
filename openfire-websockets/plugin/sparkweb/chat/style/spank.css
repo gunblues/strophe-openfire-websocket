@@ -1,0 +1,869 @@
+/* Oddities --------------------------------- */
+h1,h2,h3,h4,h5,h6{font-size:100%;} /* This is a holdover from reset-min.css. Without it, 
+the resize handles on the edges of dialogues appear outside the dialogue until clicked upon.
+
+
+/* NOTES ---------------------------------------------------------------------------------- */
+/* .sparkweb-black needs to be added to all of these eventually. for theming purposes */
+/* DO NOT USE BORDER: NONE! This causes all sorts of issues. Use BORDER 0px; instead!
+
+
+
+/* DIALOGUES ------------------------------------------------------------------------------ */
+.ydlg { /* .ydlg is the Container for the entire chat window */
+	background: none;
+	color: #333333;
+	}
+.ydlg .ydlg-dlg-body { /* The container for everything below the titlebar */
+	background: #FFFFFF;
+	padding: 0px;
+	border-right: 4px solid #000000;
+	border-bottom: 4px solid #000000;
+	border-left: 4px solid #000000;
+	}
+.ylayout-panel { /* All internal layout is contained inside a panel with the class ylayout-panel */
+	background: none;
+	border: 0px;
+}
+
+div.dbody {
+	color: #333;
+	font-size: .9em;
+	}
+div.dbody p {
+	color: #333;
+	padding: 5px 0px 5px 0px;
+	}
+div.dbody label {
+}
+div.dbody table {
+	padding: 5px;
+	}
+
+.ydlg-bd { margin: 0px; padding: 0px; }
+
+.ylayout-nested-layout .ylayout-panel-north,
+.ylayout-nested-layout .ylayout-panel-east,
+.ylayout-nested-layout .ylayout-panel-south {
+	border: 0px;
+}
+.ydlg .ydlg-bd, .ydlg .ylayout-container {
+	border: 0px;
+	background: transparent !important;
+	margin: 0px !important;
+	}
+.ydlg-shadow {
+	background: none;
+	display:none;
+	position:absolute;
+	}
+ 
+/* .ydlg-hd is the titlebar for the chat window. It is broken up into 3 sections. Center then Left & Right Corners. */
+.ydlg .ydlg-hd {
+	background: transparent url(../images/sparkweb-black/bg_titlebar.png) repeat-x scroll 0px -48px;
+	color:#FFF;
+	font:bold 1em Verdana, Arial, Helvetica, "sans serif";
+	overflow:hidden;
+	padding:5px;
+}
+.ydlg .ydlg-hd-left {
+	background: transparent url(../images/sparkweb-black/bg_titlebar.png) no-repeat scroll 0px 0px;
+	padding-left: 4px;
+	margin-left: 0px;
+	}
+.ydlg .ydlg-hd-right {
+	background: transparent url(../images/sparkweb-black/bg_titlebar.png) no-repeat scroll right -24px;
+	padding-right: 4px;
+	margin-right: 0px;
+	}
+.ydlg .ydlg-hd h1 { 
+	margin: 0px;
+	padding: 0px;
+	font-size: 0.9em;
+}
+
+/* Icon for closing dialogues */	
+.ydlg .ydlg-close {
+	background-image:url(../images/sparkweb-black/close-sprite.gif);
+	background-repeat:no-repeat;
+	cursor:pointer;
+	font-size:1px;
+	height:14px;
+	line-height:1px;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	right:8px;
+	top:5px;
+	visibility:inherit;
+	width:15px;
+	z-index:6;
+	}
+
+
+/* DIALOGUE HANDLES ------------------------------------------------------------------------------------------------ */
+.yresizable-over .yresizable-handle-east, .yresizable-pinned .yresizable-handle-east, .ydlg div.yresizable-handle-east {
+    background:none;
+    border:none;
+	}
+.yresizable-over .yresizable-handle-east, .yresizable-pinned .yresizable-handle-west, .ydlg div.yresizable-handle-west {
+    background:none;
+    border:none;
+	}
+.yresizable-over .yresizable-handle-south, .yresizable-pinned .yresizable-handle-south, .ydlg div.yresizable-handle-south {
+    background:none;
+    border:none;
+	}
+.yresizable-over .yresizable-handle-south, .yresizable-pinned .yresizable-handle-north, .ydlg div.yresizable-handle-north {
+    background:none;
+    border:none;
+	}
+.yresizable-over .yresizable-handle-southeast, .yresizable-pinned .yresizable-handle-southeast, .ydlg div.yresizable-handle-southeast {
+    background:url(../images/sparkweb-black/handle-se.gif) left top;
+	}
+.ydlg div.yresizable-handle-southeast {
+    width:11px;
+    cursor:se-resize;
+    right:0px;
+    bottom:0px;
+    height:11px;
+    z-index:101;
+	}
+.yresizable-proxy{ /* Preview of resized dialogue */
+	border: 1px dotted #333333;
+	}
+
+
+/* DIVIDER HANDLES (for resizing within dialogues) ------------------------------------------------------------------------------ */
+.ylayout-split {
+	height: 6px; /* Only effects horizontal split */
+	width: 6px; /* Only effects vertical split */
+	position: absolute;
+	z-index: 1500;
+	}
+.ylayout-split-v {
+	background: #000 url(../images/sparkweb-black/handle-s.gif) no-repeat center center;
+}
+.ylayout-split-h {
+	background: #000 url(../images/sparkweb-black/handle-e.gif) no-repeat center center;
+	}
+
+ 
+/* USER STATUS and CONTROLS ---------------------------------------------------------------------------------------- */
+.jive-userstatus {
+	background: #FFF url(../images/sparkweb-black/bg_usercontrols.gif) repeat-x scroll left top;
+	height: 52px;
+	padding: 7px;
+	border: 1px solid #FFF;
+	}
+.jive-userstatus p.avatar {
+	float: left;
+	margin: 3px 6px 2px 2px;
+	display: none;
+	}
+.jive-userstatus p.avatar img {
+	margin: 0px;
+	padding: 1px;
+	border-width: 0px 1px 1px 0px;
+	border-color: #999;
+	border-style: none solid solid none;
+	background-color: white;
+	}
+.jive-userstatus h4 { /* Username */
+	font-size: 1.4em;
+	padding: 0px 0px 3px;
+	margin: 0px;
+	line-height: 1em;
+	}
+
+/* Link to change your status */
+.jive-userstatus p.jive-mystatus a {
+	display: block;
+	color: #000;
+	text-decoration: none;
+	margin: 0px;
+	padding: 2px 0px 0px 16px;
+	font-size: .9em;
+}
+.jive-userstatus p.jive-mystatus a span {
+	padding-right: 8px;
+	background: transparent url(../images/sparkweb-black/icon-tinyarrow-dwn.gif) no-repeat right 6px;
+}
+
+/* MENUS --------------------------------------------------------------------------------------------------------- */
+div.yuimenu { /* Overwrites menu.css */
+    background-color: #FFF;
+    border: solid 1px #ccc;
+    padding:2px;
+	}
+div.yuimenu ul { 
+	border: none;
+	list-style-type:none;
+	margin:0pt;
+	padding: 0px;
+	}
+div.yuimenu li.selected,
+div.yuimenubar li.selected {
+    background-color:#f6f6f6;
+}
+
+div.yuimenu li.selected a.selected,
+div.yuimenubar li.selected a.selected {
+    text-decoration:none;
+	border: none;
+    color:#333;
+	}
+
+
+div#jive-statusmenu, div#contact-conmenu, div#group-conmenu {
+	font-size: 0.9em;
+	}
+div#jive-statusmenu ul, div#contact-conmenu ul, div#group-conmenu ul {
+	padding: 0px 0px 5px 0px;
+	}
+div#jive-statusmenu ul.first-of-type,
+div#contact-conmenu ul.first-of-type, 
+div#group-conmenu ul.first-of-type {
+	padding: 5px 0px 5px 0px;
+	}
+div#jive-statusmenu ul li, div#contact-conmenu ul li, div#group-conmenu ul li {
+	padding: 0px 0px 4px 18px;
+    font-size:100%;
+    cursor:pointer;
+    cursor:hand;
+    white-space:nowrap;
+    text-align:left;
+	}
+div#jive-statusmenu ul li a {
+	font-style: normal;
+	color: #333;
+	}
+ 
+
+/* ROSTER ------------------------------------------------------------------------------------------------ */
+ul#jive-roster, 
+div.jive-muc-occupants { /* Roster Container */
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+	font-size: .8em;
+	color: #333;
+	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
+	}
+	
+/* ROSTER GROUPS ----------------------------------------------------------------------- */
+ul#jive-roster span.group-label, 
+div.jive-muc-occupants span.group-label {  /* Collapsible Group Label */
+	background:#F6F6F6 url(../images/sparkweb-black/bg_grouplabel.gif) repeat-x scroll left top;
+	cursor:pointer;
+	display:block;
+	margin:0px 0px 2px;
+	padding:2px 0px 3px 7px;
+	}
+ul#jive-roster span.group-label em, 
+div.jive-muc-occupants span.group-label em { /* Group Name */
+	font-weight: bold;
+	display: block;
+	font-style: normal;
+	color: #505050;
+	}
+ul#jive-roster li.group {
+	}
+
+ul#jive-roster li.group span.open em { /* Open Group */
+	background: transparent url(../images/sparkweb-black/icon-arrow-dwn.gif) no-repeat left center;
+	padding: 0px 0px 0px 14px;
+	}
+ul#jive-roster li.group span.closed em { /* Closed Group */
+	background: transparent url(../images/sparkweb-black/icon-arrow-rght.gif) no-repeat left center;
+	padding: 0px 0px 0px 14px;
+	}
+
+/* ROSTER CONTACTS ---------------------------------------------------------------------- */
+ul.jive-roster ul.group-list li, 
+div.jive-muc-occupants ul ul.group-list li {
+	display: block;
+	padding:2px 0px 5px 19px;
+	margin: 0px 0px 2px 0px;
+	cursor: pointer;
+	list-style: none;
+}
+div.jive-muc-occupants ul ul.group-list li { /* Group Chats don't need the big left padding */
+	padding:4px 0px 4px 5px;
+}
+ul.jive-roster ul.group-list li.even, 
+div.jive-muc-occupants ul ul.group-list li.even { /* Every even numbered contact */
+	background: #f6f6f6;
+}
+
+ul.jive-roster ul.group-list li.odd, 
+div.jive-muc-occupants ul ul.group-list li.odd { /* Every odd numbered contact */
+}
+
+ul.jive-roster ul.group-list li.hover, 
+div.jive-muc-occupants ul ul.group-list li.hover { /* Hovering over a contact in the roster */
+	color: #000;
+	background: #ffc955 url(../images/sparkweb-black/bg-roster-userhighlight.gif) repeat-x center center;
+}
+
+ul.jive-roster ul.group-list li.selected, 
+div.jive-muc-occupants ul ul.group-list li.selected { /* Selecting a contact in the roster */
+	color: #000;
+	border-top: 1px solid #FFAD04;
+	border-bottom: 1px solid #FFAD04;
+	background: #ffc955 url(../images/sparkweb-black/bg-roster-userhighlight.gif) repeat-x center center;
+	padding: 1px 0px 4px 19px;
+}
+div.jive-muc-occupants ul ul.group-list li.selected {
+	padding: 3px 0px 3px 5px;
+}
+
+ul#jive-roster ul.group-list li span.username,
+div.jive-muc-occupants ul ul.group-list li span.username { /* Contact names in Roster */
+	color: #333;
+	padding:1px 0px 0px 18px;
+	display: block;
+	}
+
+ul#jive-roster ul.group-list li span.msg,
+div.jive-muc-occupants ul ul.group-list li span.msg { /* Status message of contacts */
+	color: #999;
+	display: block;
+	padding: 0px 0px 0px 18px;
+}
+
+/* ROSTER STATUS IMAGES -------------------------------------------------------------------------- */
+.roster-contact-available {
+	background: url(../images/im_available.png) no-repeat;
+}
+
+.roster-contact-chat {
+	background: url(../images/im_free_chat.png) no-repeat;
+}
+
+.roster-contact-composing {
+	background: url(../images/message_edit.png) no-repeat;
+}
+
+.roster-contact-away {
+	background: url(../images/im_away.png) no-repeat;
+    font-style: italic;
+    color: #999;
+}
+
+.roster-contact-xa {
+	background: url(../images/im_away.png) no-repeat;
+    font-style: italic;
+    color: #999;
+}
+
+.roster-contact-dnd {
+	background: url(../images/im_dnd.png) no-repeat;
+    font-style: italic;
+    color: #999;
+}
+
+.roster-contact-onphone {
+	background: url(../images/im_onphone.png) no-repeat;
+    font-style: italic;
+    color: #999;
+}
+
+.roster-contact-onroad {
+	background: url(../images/im_onroad.png) no-repeat;
+}
+
+.roster-contact-pending {
+	background: url(../images/im_pending.png) no-repeat;
+}
+
+.roster-contact-unavailable {
+	background: url(../images/im_unavailable.png) no-repeat;
+    font-style: italic;
+    color: #999;
+}
+
+
+/* ROSTER CONTROLS - All THE FUN ICONS AND STUFF ----------------------------------------------- */
+.jive-controlpanel {
+	padding: 0px;
+	margin: 0px;
+	}
+.jive-ctrlbar {
+	height: 29px;
+	padding: 0px 2px;
+	float: right;
+}
+.jive-ctrlbar div.icon {
+	margin-left: 2px;
+	height: 29px;
+	width: 40px;
+	display: block;
+	cursor:pointer;
+	font-size:1px;
+	line-height:1px;
+	float: left;
+}
+.jive-ctrlbar div.button-addcontact {
+	background: url(../images/sparkweb-black/icon-addcontact.png) no-repeat;
+}
+.jive-ctrlbar div.button-groupchat {
+	background: url(../images/sparkweb-black/icon-groupchat.png) no-repeat;
+}
+.jive-ctrlbar div.button-startchat {
+	background: url(../images/sparkweb-black/icon-startchat.png) no-repeat; /* need to make a start chat icon */
+}
+.jive-ctrlbar div.icon.hover {
+	background-position: 0px -29px;
+}
+.jive-ctrlbar div.icon.active {
+	background-position: 0px -58px;
+}
+.jive-ctrlbar div.icon.disabled {
+	background-position: 0px -87px;
+	cursor: none;
+}
+
+
+/* GROUP CHAT ----------------------------------------------------------------------------------------- */
+div.jive-topic {
+	background: #FFFFFF url(../images/sparkweb-black/bg_usercontrols.gif) repeat-x left top;
+	padding: 7px;
+	font: Verdana, Arial, Helvetica, sans-serif;
+}
+div.jive-topic p { /* The actual topic itself */
+	color:#FDA555;
+	font-size:0.8em;
+	line-height:1.5em;
+	margin:-2px 0px 0px;
+	}
+div.jive-topic p span.jive-topic-name {
+	color: #333;
+	font-size: 1.2em;
+	font-weight: bold;	
+}
+
+
+/* Inline Group Chat Invite */
+div.jive-mucinvite { /* box that appears inline in chat windows */
+	background-color: #F6F6F6;
+}
+div.jive-mucinvite p {
+	font-weight: bold;
+	font-size: 1em;
+	color: #333;
+}
+div.jive-mucinvite p span {
+	color: #cf691e;
+}
+div.jive-mucinvite a {
+	margin: 0px 9px;
+	font-size: 1em;
+	text-decoration: underline;
+	color: #cf691e;
+}
+div.jive-mucinvite a:hover {
+	margin: 0px 9px;
+	font-size: 1em;
+	text-decoration: none;
+}
+
+
+/* MESSAGES ------------------------------------------------------------------------------------------- */
+div.jive-history div {
+    padding: 5px;
+    font-size: 0.9em;
+    margin: 0px;
+	}
+div.jive-history div span.meta em /* Data and Time */
+{
+	font-size: .9em;
+	color: #aaa;
+	font-style: normal;
+	}
+div.jive-history div.user-message span.meta { /* User Name */
+	color: #6993bf;
+	}
+div.jive-history div.contact-message span.meta { /* Other Contact's Name */
+	color: #D2832B;
+	}
+.jivetheme-muc div.jive-history div span.message-content { /* Content of messages in the chat history */
+	line-height: 1.2em;
+	width: 100%;
+}
+div.jive-history div.mentioned { /* If someone mentions your name in chat, this style controls the look of their message */
+	background: #ffff99;
+}
+
+div.jive-history div.consecutive { /* Style for consecutive messages from a user */
+	margin: -10px 0px 5px 0px;
+}
+div.jive-history div.consecutive span.meta { /* Consecutive messages do not display the username or time */
+	display: none;
+}
+
+div.jive-history div.action span.meta { /* Messages sent as /me some message are displayed as * username some message */
+	display: none;
+}
+
+div.jive-history div.status-message { /* Messages from the server (User logged out, logged in, etc.) */
+	color: #666666;
+	margin: 3px 0px;
+	padding: 2px 5px;
+}
+div.jive-history div span img { /* Images within the chat. Typically an emoticon. */
+	margin-bottom: -4px;
+	}
+div.jive-history div span a:link { color: #FC891D; }
+div.jive-history div span a:visited { color: #FC891D; }
+div.jive-history div span a:hover { color: #FC891D; text-decoration: none; }
+div.jive-history div span a:active { color: #FC891D; text-decoration: none; }
+
+
+/* Message Input Area */
+textarea.jive-tab-message
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+	border: 0px none;
+	padding: 3px;
+	margin: 0px;
+}
+
+
+
+
+/* TABS -------------------------------------------------------------------------------------------------- */
+.ytab-wrap table {
+	left:-2px; /* Moves the tabs flush left */
+	position:relative;
+	top:0pt;
+	}
+.ylayout-panel .ytab-wrap { /* Container for the tabs */
+	background: #000;
+	border-bottom:0px none;
+	border-top:1px solid #000;
+	padding: 0px 0px 2px 0px;
+	height: 20px;
+	}
+.ytab-strip .ytab-closable .close-icon {
+	cursor:pointer;
+	display:block;
+	font-size:1px;
+	line-height:1px;
+	height:10px;
+	width:10px;
+	position:absolute;
+	right:5px;
+	top: 7px;
+	background: url(../images/sparkweb-black/tab-close.gif) no-repeat 0px 0px;
+	}
+.ytab-strip .ytab-closable .close-hover {
+	cursor:pointer;
+	display:block;
+	font-size:1px;
+	line-height:1px;
+	height:10px;
+	width:10px;
+	position:absolute;
+	right:5px;
+	top: 7px;
+	background: url(../images/sparkweb-black/tab-close.gif) no-repeat 0px 10px;
+	}
+	
+.ytabs-bottom .ytab-strip .ytab-inner {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	}
+.ytab-strip .ytab-closable .ytab-inner { /* Needed to set the close icon properly */
+	padding-right: 22px;
+	padding-left: 5px;
+	position: relative;
+	}
+
+
+/* Focused Tabs */
+.ytabs-bottom .ytab-strip .on .ytab-right {
+	background:transparent url(../images/sparkweb-black/tab-btm-right-bg.gif) no-repeat scroll left bottom;
+	}
+.ytabs-bottom .ytab-strip .on .ytab-left {
+	background:transparent url(../images/sparkweb-black/tab-btm-left-bg.gif) no-repeat scroll right bottom;
+	}
+.ytabs-bottom .ytab-strip .on a {
+	margin-top:-1px; /* moves the tab up one pixel */
+	}
+
+
+/* Unfocused Tabs */
+.ytabs-bottom .ytab-strip .ytab-right {
+	background:transparent url(../images/sparkweb-black/tab-btm-inactive-right-bg.gif) no-repeat scroll left bottom;
+	}
+.ytabs-bottom .ytab-strip .ytab-left {
+	background:transparent url(../images/sparkweb-black/tab-btm-inactive-left-bg.gif) no-repeat scroll right bottom;
+	}
+
+/* Tab Text */
+.ytab-strip .ytab-text { /* Unfocused Tab Text */
+	padding-left: 16px;
+	color: #777;
+}
+.ytab-strip .on .ytab-text { /* Focused Tab Text */
+	color:#333;
+	}
+td.ytab-closable span.flashNotify { /* Notification of new messages on a tab */
+	color: #f78f00 !important;
+	font-weight: bold !important;
+	}
+
+/* Tab Status */
+td.ytab-closable span.jive-status-unavailable,
+td.ytab-closable span.jive-status-away,
+td.ytab-closable span.jive-status-available,
+td.ytab-closable span.jive-status-dnd,
+td span.jive-muc,
+td.ytab-closable span.jive-status-pending,
+td.ytab-closable span.jive-status-composing
+{
+	background-position: -1px -1px;
+	background-repeat: no-repeat;
+	}
+td.ytab-closable span.jive-status-unavailable {background-image: url(../images/im_unavailable.png);}
+td.ytab-closable span.jive-status-away {background-image: url(../images/im_away.png);}
+td.ytab-closable span.jive-status-available {background-image: url(../images/im_available.png);}
+td.ytab-closable span.jive-status-dnd {background-image: url(../images/im_dnd.png);}
+td.ytab-closable span.jive-status-composing {background-image: url(../images/message_edit.png);}
+td.ytab-closable span.jive-status-pending {background-image: url(../images/im_pending.png);}
+td span.jive-muc {background-image: url(../images/conference_16x16.png);}
+
+
+/* SEARCH DIALOGUE */
+div.jive-dbody-description {
+	padding: 5px;
+}
+div.jive-dbody-description h1 {
+	font-size: 1.1em;
+}
+div.jive-dbody-description p {
+	font-size: .9em;
+}
+
+div.jive-searchform {
+	padding: 5px;
+}
+div.jive-searchform fieldset {
+	padding: 5px;
+}
+div.jive-searchform legend {
+	padding: 0px 5px;
+}
+div.jive-searchform p{
+	padding: 5px;
+	display:block;
+	float:left;
+	}
+div.jive-searchform input{
+	padding: 2px;
+}
+
+div.jive-searchform p.buttons { /* Submit button */
+	clear:both;
+	float:none;
+	padding:0px 48px;
+	}
+div.jive-searchform p.buttons input{
+	padding: 0px;
+}
+
+
+
+
+
+
+/* invite menu */
+div.jive-muc-ctrl {
+	height: 29px;
+	padding: 3px;
+	position: relative;
+	font-size: 0.8em;
+}
+div.muc-ctrl-frame {
+	display: inline;
+	position: absolute;
+}
+div.jive-invite-control, div.jive-changenick-control {
+	background: #333;
+	color: #fff;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #ccc;
+	padding: 3px 3px;
+	cursor: pointer;
+	display: block;
+	float: left;
+	margin: 0px 5px 2px 0px;
+	font-size: .8em;
+}
+div.jive-invite-menu {
+	position: absolute;
+	border: 1px solid #000;
+	background-color: white;
+}
+div.yui-ac-bd {
+	font-family: Arial,Geneva,sans-serif;
+	font-size: 0.78em;
+}
+div.yui-ac-bd li {
+	height: 16px;
+	overflow: hidden;
+	cursor: pointer;
+}
+div.yui-ac-bd li.yui-ac-highlight {
+	background-color: #bcc;
+}
+div.jive-invite-menu div.yui-ac-bd li div {
+	padding-left: 18px;
+}
+div.yui-ac-bd div.empty {
+	padding: 2px;
+	font-style: italic;
+}
+div.jive-muc-ctrl p {font-weight: bold; padding-top: 4px;}
+div.jive-muc-ctrl p span {font-weight: normal;}
+
+
+
+
+.jive-chat-toppane {
+	background: #FFFFFF url(../images/sparkweb-black/bg_usercontrols.gif) repeat-x left top;
+	padding: 0px;
+	font-family: Arial,Geneva,sans-serif;
+	position: relative;
+}
+.jive-chat-toppane p {
+	margin-left: 4px; 
+	font-size: 0.71em;
+}
+.jive-chat-toppane p.avatar {
+	float: left;
+	margin: 3px 6px 2px 2px;
+	/* display: none; */
+}
+.jive-chat-toppane p.avatar img {
+	margin: 0px;
+	padding: 1px;
+	border-width: 0px 1px 1px 0px;
+	border-color: #999;
+	border-style: none solid solid none;
+	background-color: white;
+}
+.jive-chat-toppane h4 {
+	margin-left: 5px;
+	font-size: 0.78em;
+}
+
+
+
+.jive-chat-toppane .jive-ctrlbar-topchat {
+	position: absolute;
+	top: 5px;
+	right: 4px;
+}
+
+
+.jive-toppane .dbody {
+	padding: 7px 5px; 
+	background: transparent url(../images/sparkbg.gif) repeat-x scroll left bottom;
+}
+.jive-toppane .dhead {padding: 4px 6px; font-size: 0.71em; font-weight: bold;}
+.jive-toppane .chooseconf a {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 7px;
+	padding: 3px 3px 3px 21px;
+	background-repeat: no-repeat;
+	background-position: 0px 1px;
+	border-style: solid;
+	border-color: black;
+	border-width: 0px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:2px;
+	-moz-border-radius-topleft:2px;
+	-moz-border-radius-topright:2px;
+}
+.jive-toppane .chooseconf a:hover {
+	border-width: 1px;
+	padding: 2px 2px 2px 20px;
+	text-decoration: underline;
+}
+
+
+.jive-chat-toppane {
+	height: 250px;
+}
+
+/* small dialogs and chat toppane */
+.ydlg-bd .dhead {
+	background-color: white;
+	padding: 8px 4px;
+	font-family: Arial,Geneva,sans-serif;
+	font-size: 0.78em;
+}
+.ydlg-bd .dhead p {
+	padding: 7px;
+	font-size: 0.75em;
+	background-color: #e5e9ec;
+}
+.ydlg-bd .dbody td {
+	padding: 4px 0px;
+}
+.ydlg-bd .dbody input.btn {
+	padding: 1px 9px;
+}
+div.groups-ac {
+	font-family: Arial,Geneva,sans-serif;
+	font-size: 0.78em;
+	position: absolute;
+	border: 1px solid black;
+	background-color: #fff;
+	padding: 2px;
+	width: 100px;
+	visibility: hidden;
+}
+
+div.fieldset {
+	margin: 20px 4px 8px 4px;
+	border: 1px solid #aaa;
+	padding: 5px;
+}
+p.legend {
+	margin-top: -15px;
+	margin-bottom: 5px;
+}
+p.legend span {
+	background-color: #e5e9ec;
+	padding: 2px;
+}
+div.fieldset label.disabled, div.fieldset td.disabled {color: #999;}
+input.subrequest {margin: 0px 6px; padding: 1px 4px;}
+
+#jive-spinner
+{
+	padding: 3px;
+	width: 120px;
+	height: 25px;
+	position: absolute;
+	font-family: Arial,Geneva,sans-serif;
+	font-size: 0.71em;
+	font-weight: bold;
+}
+#jive-spinner img {padding: 0px 4px;}
+div.jive-spinnertab {background-color: #e5e9ec !important; position: relative;}
+div.jive-spinnertab div {position: absolute; top: 185px; left: 200px;}
+
+
+.mucinviteoption {
+	color: darkblue;
+}

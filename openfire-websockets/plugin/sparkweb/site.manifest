@@ -1,0 +1,56 @@
+CACHE MANIFEST
+# v0.9 update 20120905-sylvestre mba - client navigator cache css, js, gif, png change version number for purge cache.
+
+CACHE:
+index.html
+chat/javascript/sparkweb.js
+chat/javascript/spank.js
+chat/javascript/xmpp-ws.js
+chat/javascript/xmpp-bosh.js
+chat/javascript/thirdparty.js
+chat/javascript/yui.js
+chat/style/basic-dialog.css
+chat/style/grid.css
+chat/style/layout.css
+chat/style/menu.css
+chat/style/resizable.css
+chat/style/tabs.css
+chat/style/toolbar.css
+chat/style/login.css
+chat/style/spank.css
+
+chat/images/login/logo_SparkWeb-small.gif
+chat/images/login/anim-loading.gif
+chat/images/login/logo_SparkWeb-large.gif
+chat/images/login/buttons/btn_Small.gif
+chat/images/login/backgrounds/bg_body.gif
+chat/images/login/backgrounds/bg_LoginTop-NoButton.png
+chat/images/login/backgrounds/bg_LoginBody.png
+chat/images/login/backgrounds/bg_Login-Bottom.png
+chat/images/login/backgrounds/bg_Footer.png
+chat/images/login/backgrounds/bg_Footer.png
+chat/images/sparkweb-black/icon-tinyarrow-dwn.gif
+chat/images/sparkweb-black/bg-roster-userhighlight.gif
+chat/images/sparkweb-black/icon-arrow-dwn.gif
+chat/images/sparkweb-black/bg_grouplabel.gif
+chat/images/sparkweb-black/bg_usercontrols.gif
+chat/images/sparkweb-black/bg_titlebar.gif
+chat/images/sparkweb-black/handle-e.gif
+chat/images/sparkweb-black/close-sprite.gif
+chat/images/sparkweb-black/icon-startchat.png
+chat/images/sparkweb-black/icon-groupchat.png
+chat/images/sparkweb-black/icon-addcontact.png
+chat/images/im_available.png
+chat/images/im_away.png
+chat/images/layout/panel-close.gif
+chat/images/layout/panel-title-light-bg.gif
+chat/images/layout/collapse.gif
+chat/images/layout/expand.gif
+chat/images/im_pending.png
+chat/images/gradient-bg.gif
+#cache the login page in case network is not ready, users think that network is ok
+FALLBACK:
+offline.html
+#all other files which are not cached work directly with network
+NETWORK:
+*

@@ -1,0 +1,25 @@
+{
+   "background_page": "html/background.html",
+   "content_scripts": [ {
+      "css": [ "css/style.css", "css/boxy.css"],
+      "exclude_globs": [ "*://chrome.google.com/webstore/*", "about:blank" ],
+      "js": [ "js/jquery.js", "js/jquery.boxy.js", "js/tab/micro-templating.js", "js/tab/autoresize.js", "js/tab/autolink.js", "js/tab/assistant.js", "js/tab/follower.js", "js/sdptojingle.js", "js/tab/jingle.js", "js/tab/jquery.switchToClass.js", "js/tab/jquery.blockUI.js", "js/tab/jquery.scrollbarWidth.js", "js/gtalklet.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "Openfire Chat extension for Google Chrome",
+   "icons": {
+      "128": "icon128.gif",
+      "16": "icon.gif",
+      "48": "icon48.gif"
+   },
+   "minimum_chrome_version": "19",
+   "name": "OfChat",
+   "options_page": "options/index.html",
+
+   "page_action": {
+      "default_title": "Openfire Chat"
+   },  
+   "permissions": ["experimental", "tabs", "notifications", "idle", "http://*/", "https://*/"],
+   "version": "0.0.0.9"
+}

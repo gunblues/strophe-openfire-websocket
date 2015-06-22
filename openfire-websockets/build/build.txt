@@ -1,0 +1,20 @@
+Buildfile: C:\Projects\websockets\build\build.xml
+
+clean:
+   [delete] Deleting directory C:\Projects\websockets\build\classes\com
+
+init:
+
+compile:
+    [javac] C:\Projects\websockets\build\build.xml:26: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 5 source files to C:\Projects\websockets\build\classes
+
+jar:
+      [jar] Building jar: C:\Projects\websockets\plugin\lib\websockets.jar
+      [jar] Building jar: C:\Projects\websockets\plugin\WEB-INF\lib\websockets.jar
+
+war:
+      [jar] Building jar: C:\Work\Projects\2010.04.21-iTrader\Workspace\openfire_3_10_0\target\openfire\plugins\websockets.war
+
+BUILD SUCCESSFUL
+Total time: 1 second

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html manifest="site.manifest">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Demo</title>
+    <script type="text/javascript">
+    	var sparkweb = {};
+    </script>
+    <script src="chat/javascript/thirdparty.js" type="text/javascript"></script>
+    <script src="chat/javascript/yui.js" type="text/javascript"></script>
+    <script src="chat/javascript/spank.js" type="text/javascript"></script>
+    <script src="chat/javascript/sparkweb.js" type="text/javascript"></script>
+    <script src="chat/javascript/xmpp-ws.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="chat/style/basic-dialog.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/grid.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/layout.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/menu.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/resizable.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/tabs.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/toolbar.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/login.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="chat/style/spank.css" type="text/css" media="screen" charset="utf-8"/>
+
+    <!--[if lt IE 7]>
+    <link rel="stylesheet" type="text/css" href="login-ie6.css" />
+    <![endif]-->
+    <!--[if lt IE 7]>
+    <link rel="stylesheet" type="text/css" href="spank-ie6.css" />
+    <![endif]-->
+</head>
+<body>
+   <div id="jive_sw_container">
+        <div id="jive_sw_userbar-container">
+        	<div id="jive_sw_userbar">
+				<p><img src="chat/images/login/logo_SparkWeb-small.gif" width="148" height="52" class="logo"/></p>
+				<ul>
+					<li><a href="#" class="jive-logout-link">Logout</a></li>
+				</ul>
+        		<p id="version">1.0.0</p>
+        		<div id="jive_sw_userbar-username">
+					<p><div id="myAvatar"></div></p>
+       			</div>
+
+        		<div id="user-search-form">
+					<form id="user-search">
+						<p> Search
+							<input type="text" name="search"/>
+						</p>
+						<input name="submit" type="submit"
+                               disabled="disabled" id="user-search-submit" value="Search"/>
+					</form>
+       			</div>
+       		</div>
+        	<!-- End of jive_sw_userbar -->
+		</div>
+        <!-- End of jive_sw_userbar-container -->
+
+        <div id="jive_sw_login-container">
+            <div id="jive_sw_login-top-plain">
+                <p>&nbsp;</p>
+
+                <!-- <p id="btn-create-account" class="btn-create-account"><a id="create-account" href="#createAccount">Create Account</a></p> -->
+            </div>
+            <div id="jive_sw_login">
+            	<img id="jive_loader" src="chat/images/login/anim-loading.gif"
+                     style="display:none" />
+                <h1 id="logo">Demo</h1>
+
+                <p id="login-version" class="version jive-version">1.0.0b</p>
+
+                <form action="" id="jive_sw_login-form" method="post">
+                    <p><label id="loginname-label"for="name" accesskey="1">User Name:</label>
+                        <input name="name" type="text" id="loginname" tabindex="1"/></p>
+
+                    <p><label id="password-label"for="password">Password:</label>
+                        <input type="password" id="loginpassword" name="password" tabindex="2"/></p>
+
+                    <p class="smallbutton"><input class="smallbutton" id="login" name="login"
+                                                  type="submit"
+                                                  value="Login" tabindex="3"/></p>
+                </form>
+                <form action="" id="jive_sw_account-creation-form" method="post"
+                      style="display:none">
+                    <p><label for="name" accesskey="2">Name:</label>
+                        <input name="name" type="text" id="name" tabindex="10"/></p>
+
+                    <p><label for="email">E-Mail:</label>
+                        <input type="text" id="email" name="email" tabindex="11"/></p>
+
+                    <p><label for="email" class="jive_red">Password:</label>
+                        <input class="error" type="password" id="password" name="password"
+                               tabindex="12"/></p>
+
+                    <p><label for="confirmpassword" class="jive_red">Confirm Password:</label>
+                        <input class="error" type="password" id="confirmpassword"
+                               name="confirmpassword" tabindex="13"/></p>
+
+                    <br class="clearer"/>
+
+                    <p class="smallbutton"><input class="smallbutton" type="submit" value="Submit"
+                                                  tabindex="14"/></p>
+
+                    <p class="smallbutton"><input class="smallbutton" type="submit" value="Cancel"
+                                                  tabindex="15"/></p>
+
+                    <!-- Begin Error Message -->
+                    <p class="error">I'm sorry but your <span
+                            class="jive_red"><strong>password's</strong></span> did not match.
+                        Please re-enter your password and try again.</p>
+                    <!-- End Error Message -->
+                </form>
+                <br class="clearer"/>
+            </div>
+            <!-- End of jive_sw_login -->
+            <div id="jive_sw_login-bottom">
+            </div>
+        </div>
+        <!-- End of jive_sw__login-container -->
+    </div>
+    <!-- End of jive_sw_container -->
+
+	<div id="jive_sw_footer-container">
+		<div id="jive_sw_footer">
+			<p>Powered by <a
+                    href="http://www.jivesoftware.com/products/openfire/features/sparkweb.jsp">SparkWeb &reg; (1.0.0)</a>
+                - <a href="http://www.igniterealtime.org/forum/forum.jspa?forumID=52">Submit product feedback</a></p>
+		</div>
+	</div>
+	<!-- End of jive_sw_footer-container -->
+</body>
+</html>

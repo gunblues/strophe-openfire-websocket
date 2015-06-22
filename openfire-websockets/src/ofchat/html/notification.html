@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+body {font:12px/1.5 Tahoma;}
+
+#content{padding-left:40px;min-height:40px;}
+	#content *{display:block;margin:0;padding:0;}
+	#content #icon{float:left;margin-left:-40px;}
+	#message{white-space:pre-wrap;word-break:break-all;}
+
+</style>
+<script>
+
+var qs = function(str)
+{
+    var data = {}, decode = decodeURIComponent;
+    str.replace(/([^?=&]+)(=([^&]*))?/g,function( $0, $1, $2, $3 ){ data[$1] = decode($3);});
+    return data;
+}
+var q = JSON.parse(qs(location.search).params);
+var id = function(id) {
+	return document.getElementById(id);
+};
+var bg = chrome.extension.getBackgroundPage();
+var hide = function() {
+	bg.boss.hideNotifications();
+}
+var timer = null;
+var delay_hide = function(delay) {
+	if(timer){
+		timer = clearTimeout(timer);
+	}
+	timer = setTimeout(hide,delay || 5000);
+};
+
+delay_hide(q.timeout);
+
+document.addEventListener('DOMContentLoaded',function() {
+	id('message').textContent = q.message || '';
+	id('title').textContent = q.title || '';
+	id('icon').src = q.icon || chrome.extension.getURL('notification.gif');
+});
+
+
+document.addEventListener('scroll',function() {
+	delay_hide(8000);
+});
+
+document.addEventListener('click',function() {
+
+    var last_tab = bg.followerManager.getLastActiveFollower();
+
+	if( !last_tab ) hide();
+	chrome.windows.get(last_tab.window,function(win) {
+		if(win){
+			chrome.windows.update(win.id,{focused:true});
+			chrome.tabs.update(last_tab.id,{selected:true});
+		}
+		hide();
+	});
+})
+</script>
+</head>
+<body>
+<div id="content">
+	<img src="" id="icon" width="32" height="32" />
+	<strong id="title"></strong>
+	<p id="message"></p>
+</div>
+</body>
+</html>

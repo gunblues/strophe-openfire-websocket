@@ -1,0 +1,56 @@
+<!--
+// Copyright (c) 2011 Frank Kohlhepp
+// https://github.com/frankkohlhepp/fancy-settings
+// License: LGPL v2.1
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title id="title"></title>
+
+        <!-- Stylesheets -->
+        <link id="favicon" rel="icon" href="icon.gif">
+        <link rel="stylesheet" href="fancy-settings/source/lib/default.css" media="screen">
+        <link rel="stylesheet" href="fancy-settings/source/css/main.css" media="screen">
+        <link rel="stylesheet" href="fancy-settings/source/css/setting.css" media="screen">
+        <link rel="stylesheet" href="fancy-settings/source/custom.css" media="screen">
+        <style type="text/css">
+            input.error {
+                background: #FBE3E4;
+            }
+        </style>
+
+        <!-- JavaScripts -->
+        <script src="fancy-settings/source/lib/mootools-core.js"></script>
+        <script src="fancy-settings/source/lib/store.js"></script>
+        <script src="fancy-settings/source/js/classes/tab.js"></script>
+        <script src="fancy-settings/source/js/classes/setting.js"></script>
+        <script src="fancy-settings/source/js/classes/search.js"></script>
+        <script src="fancy-settings/source/js/classes/fancy-settings.js"></script>
+        <script src="i18n.js"></script> <!-- must before js/i18n.js -->
+        <script src="fancy-settings/source/js/i18n.js"></script>
+        <script src="manifest.js"></script>
+        <script src="settings.js"></script>
+        <script src="../js/jquery.js"></script>
+        <script>jQuery.noConflict();</script>
+
+    </head>
+    <body class="no-select">
+        <div id="sidebar" class="fancy">
+            <img id="icon" src="" alt="" style="display:none">
+            <h1 id="settings-label">Options</h1>
+            <div id="tab-container">
+                <div id="search-container" class="tab">
+                    <input id="search" type="search" placeholder="Search..." style="display: none">
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="search-result-container" class="tab-content">
+                <h2 id="search-label">Search</h2>
+            </div>
+        </div>
+
+    </body>
+</html>

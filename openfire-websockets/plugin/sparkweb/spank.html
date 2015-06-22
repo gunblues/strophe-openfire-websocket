@@ -1,0 +1,285 @@
+<html>
+<head>
+<title>Openlink Demo</title>
+<script language="JavaScript" src="/ws/sparkweb/chat/javascript/thirdparty.js" type="text/javascript"></script>
+<script language="JavaScript" src="/ws/sparkweb/chat/javascript/xmpp-ws.js" type="text/javascript"></script>
+<script language="JavaScript" src="/ws/sparkweb/chat/javascript/spank.js" type="text/javascript"></script>
+
+
+
+<script language="JavaScript">
+	var loginName, loginPassword, myJID;
+	var connection, rosterManager, presenceManager, chatManager, chatSessionListener, mucManager, discoManager;
+	var domain = window.location.hostname;
+
+    var sparkweb = {};
+
+
+	function getParameter(string, parm, delim) {
+
+		 if (string.length == 0) {
+			return '';
+		 }
+
+		 var sPos = string.indexOf(parm + "=");
+
+		 if (sPos == -1) {return '';}
+
+		 sPos = sPos + parm.length + 1;
+		 var ePos = string.indexOf(delim, sPos);
+
+		 if (ePos == -1) {
+			ePos = string.length;
+		 }
+
+		 return unescape(string.substring(sPos, ePos));
+	}
+
+	function getPageParameter(parameterName, defaultValue) {
+
+		var s = self.location.search;
+
+		if ((s == null) || (s.length < 1)) {
+			return defaultValue;
+		}
+
+		s = getParameter(s, parameterName, '&');
+
+		if ((s == null) || (s.length < 1)) {
+			s = defaultValue;
+		}
+
+		return s;
+	}
+
+	function spankLogin()
+	{
+		console.log("spankLogin");
+
+		loginName = getPageParameter('username', 'admin');
+		loginPassword = getPageParameter('password', 'changeme');
+		domain = getPageParameter('domain', domain);
+
+		myJID = loginName + "@" + domain;
+
+		connection = new XMPPConnection("/http-bind/", window.location.hostname, new MyConnectionListener(loginName, loginPassword));
+		connection.connect();
+
+	}
+
+    function spankLogoff()
+    {
+		console.log("spankLogoff");
+
+		var presence = new XMPP.Presence();
+		presence.setType("unavailable");
+		connection.logout(presence);
+    }
+
+
+	function myRosterHandler()
+	{
+		console.log("myRosterHandler");
+
+		var rosterObj = rosterManager.getRoster()
+
+		for (var groupName in rosterObj) {
+		    var groupObj = rosterObj[groupName];
+
+		    console.log("Group - " + groupName);
+
+				for (var userJID in groupObj) {
+					var userObj = groupObj[userJID];
+					console.log("User - " + userObj.getJID().toString());
+				}
+
+		}
+	}
+
+
+	function myPresenceHandler(myPresence)
+	{
+		console.log("myPresenceHandler");
+		console.log(myPresence.toXML());
+	}
+
+
+	MyRosterListener = function()
+	{
+
+	}
+
+	MyRosterListener.prototype.onAdded = function(added)
+	{
+		console.log("MyRosterListener onAdded");
+
+		for (var i=0; i < added.length; i++)
+		{
+			console.log(added[i].getJID().toString())
+		}
+	}
+
+
+	MyRosterListener.prototype.onRemoved = function(removed)
+	{
+		console.log("MyRosterListener onRemoved");
+
+		for (var i=0; i < removed.length; i++)
+		{
+			console.log(removed[i].getJID().toString())
+		}
+	}
+
+
+	MyRosterListener.prototype.onUpdated = function(updated)
+	{
+		console.log("MyRosterListener onUpdated");
+
+		for (var i=0; i < updated.length; i++)
+		{
+			console.log(updated[i].getJID().toString())
+		}
+	}
+
+
+	MyConnectionListener = function(username, password)
+	{
+		console.log("MyConnectionListener");
+
+		this.username = username;
+		this.password = password;
+	}
+
+	MyConnectionListener.prototype.connectionSuccessful = function(connection)
+	{
+		console.log("MyConnectionListener connectionSuccessful");
+
+		chatManager = new org.jive.spank.chat.Manager(connection);
+		chatSessionListener = new org.jive.spank.chat.ChatSessionListener(chatSessionCreated, chatSessionClosed);
+		chatManager.addChatSessionListener(chatSessionListener);
+		mucManager = new org.jive.spank.muc.Manager(connection, chatManager);
+		discoManager = new org.jive.spank.disco.Manager(connection);
+
+		connection.login(this.username, this.password, "spank demo");
+	}
+
+	function chatSessionClosed(manager, session) {
+		console.log("Chat session closed.");
+	}
+
+	function chatSessionCreated(manager, session) {
+		console.log("Chat session created.");
+		session.addListener(new MyMessageListener());
+	}
+
+	MyConnectionListener.prototype.connectionFailed =  function()
+	{
+		console.log("XMPP Connection failed");
+	}
+
+
+	MyConnectionListener.prototype.connectionClosed = function(closedConnection, error)
+	{
+		this.cleanUp(closedConnection, error);
+
+		if (error) {
+			console.log("Your connection to the server has closed, unexpectedly");
+		}
+		else {
+
+		}
+
+
+	}
+
+	MyConnectionListener.prototype.cleanUp = function(closedConnection, error)
+	{
+		console.log("XMPP Connection closed");
+	}
+
+
+	MyConnectionListener.prototype.authenticationSuccessful = function(connection)
+	{
+		presenceManager = new org.jive.spank.presence.Manager(connection, null, "accept");
+		presenceManager.addPresenceListener(myPresenceHandler);
+		presenceManager.sendPresence();
+
+		rosterManager = new org.jive.spank.roster.Manager(connection, myRosterHandler, presenceManager);
+		rosterManager.addRosterListener(new MyRosterListener());
+
+		setTimeout(doServiceDiscovery, 1000)
+
+	}
+
+	MyConnectionListener.prototype.authenticationFailed = function(failedConnection, error)
+	{
+		this.cleanUp(failedConnection, error);
+	}
+
+	MyConnectionListener.prototype.packetsReceived = function()
+	{
+
+	}
+
+	MyConnectionListener.prototype.packetsProcessed = function()
+	{
+
+	}
+
+	MyMessageListener = function() {
+
+	}
+
+
+	MyMessageListener.prototype.messageRecieved =  function(session, message) {
+
+		if (!message.getBody() || message.getBody().body == "") {
+			return;
+		}
+
+		session.sendMessage("Echo - " + message.getBody().body);
+	}
+
+
+
+
+	function doServiceDiscovery() {
+
+		discoManager.discoverInfo(discoInfoHandler, new XMPP.JID("relay." + domain));
+
+	}
+
+
+	function discoInfoHandler(packet) {
+
+		document.getElementById('log').innerText =  packet.toXML()
+		//discoManager.discoverItems(discoItemsHandler, new XMPP.JID("relay." + domain));
+	}
+
+
+	function discoItemsHandler(packet)
+	{
+		document.getElementById('log').innerText = packet.toXML()
+	}
+
+</script>
+
+<style type="text/css">
+
+
+</style>
+</head>
+<body topmargin="0" leftmargin="0" onLoad="spankLogin();" onUnload="spankLogoff();">
+<table>
+	<tr valign='top'>
+		<td width="50%">
+			<table>
+				<tr>
+					<td><div id="log"></div></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

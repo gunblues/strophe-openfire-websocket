@@ -1,0 +1,218 @@
+<html>
+  <head>
+    <title>VCard - </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+/*<![CDATA[*/
+ th, legend {
+  font-family: sans-serif;
+  font-size: 10px;
+    text-align: right;
+}
+/*]]>*/
+</style>
+<script language="javascript">
+var username, xmlhttp;
+
+if (window.XMLHttpRequest) {
+	xmlhttp = new XMLHttpRequest();
+} else {
+	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+}
+
+function startup() {
+
+	username = getPageParameter('me', '');
+	view = getPageParameter('view', 'no');
+
+	if (view == "yes") {
+		savebutton.style.display = "none";
+		divavatar.style.display = "none";
+		imgavatar.style.display = "";
+		imgavatar.src = "/vcard?method=getAvatar&me=" + username;
+
+	} else {
+		savebutton.style.display = "";
+		imgavatar.style.display = "none";
+		divavatar.style.display = "";
+		avatar.location.href = "/vcard?method=getForm&me=" + username;
+	}
+
+	getVCARD();
+}
+
+
+function getVCARD() {
+
+	var xml = getXMLvCard()
+
+	VCARD.FN.value = getTag(xml, "FN");
+	VCARD.FAMILY.value = getTag(xml, "FAMILY");
+	VCARD.GIVEN.value = getTag(xml, "GIVEN");
+	VCARD.NICKNAME.value = getTag(xml, "NICKNAME");
+
+	VCARD.EMAIL.value = getTag(xml, "USERID");
+	VCARD.URL.value = getTag(xml, "URL");
+
+	VCARD.VOICE_WORK.value = getTELTag(xml, "VOICE", "WORK");
+	VCARD.CELL_WORK.value = getTELTag(xml, "CELL", "WORK");
+	VCARD.VOICE_HOME.value = getTELTag(xml, "VOICE", "HOME");
+	VCARD.CELL_HOME.value = getTELTag(xml, "CELL", "HOME");
+
+	VCARD.PCODE.value = getTag(xml, "PCODE");
+	VCARD.REGION.value = getTag(xml, "REGION");
+	VCARD.STREET.value = getTag(xml, "STREET");
+	VCARD.CTRY.value = getTag(xml, "CTRY");
+	VCARD.LOCALITY.value = getTag(xml, "LOCALITY");
+
+	VCARD.ORGNAME.value = getTag(xml, "ORGNAME");
+	VCARD.ORGUNIT.value = getTag(xml, "ORGUNIT");
+	VCARD.TITLE.value = getTag(xml, "TITLE");
+}
+
+
+function saveVCARD() {
+
+	VCARD.me.value = username;
+	VCARD.submit();
+
+}
+
+
+
+function getXMLvCard() {
+
+	if (xmlhttp) {
+		xmlhttp.open("GET", "/vcard?method=getVCard&me=" + username, false)
+		xmlhttp.send(null)
+		return xmlhttp.responseText
+	}
+
+}
+
+function getTag(xml, tag) {
+	var tagXML = "";
+	var i = xml.indexOf("<" + tag + ">")
+
+	if (i > -1) {
+		tagXML = xml.substring(i + tag.length + 2, xml.indexOf("</" + tag + ">"))
+	}
+
+	return tagXML
+}
+
+function getTELTag(xml, tag1, tag2) {
+	var tagXML = "";
+	var i = xml.indexOf("<TEL><" + tag1 + "/><" + tag2 + "/><NUMBER>")
+
+	if (i > -1) {
+		var xml2 = xml.substring(i + tag1.length + tag2.length + 19);
+		tagXML = xml2.substring(0, xml2.indexOf("</NUMBER>"))
+	} else {
+		i = xml.indexOf("<TEL><" + tag1 + "></" + tag1 + "><" + tag2 + "></" + tag2 + "><NUMBER>")
+		var xml2 = xml.substring(i + tag1.length + tag2.length + tag1.length + tag2.length + 23);
+		tagXML = xml2.substring(0, xml2.indexOf("</NUMBER>"))
+	}
+
+	return tagXML
+}
+
+function getParameter(string, parm, delim) {
+
+     if (string.length == 0) {
+     	return '';
+     }
+
+	 var sPos = string.indexOf(parm + "=");
+
+     if (sPos == -1) {return '';}
+
+     sPos = sPos + parm.length + 1;
+     var ePos = string.indexOf(delim, sPos);
+
+     if (ePos == -1) {
+     	ePos = string.length;
+     }
+
+     return unescape(string.substring(sPos, ePos));
+}
+
+function getPageParameter(parameterName, defaultValue) {
+
+	var s = self.location.search;
+
+	if ((s == null) || (s.length < 1)) {
+		return defaultValue;
+	}
+
+	s = getParameter(s, parameterName, '&');
+
+	if ((s == null) || (s.length < 1)) {
+		s = defaultValue;
+	}
+
+	return s;
+}
+</script>
+</head>
+<body style="margin:8px" onload="startup()">
+<img style="display:none;" id="imgavatar" height="50" alt="" />
+<div id="divavatar" style="display:none;">
+<iframe name="avatar" id="avatar" width="500" height="50" frameborder="0" SCROLLING="no" style="border:0px;margin:0px;padding:0px;"></iframe>
+</div>
+<form name="VCARD" action="/vcard" method="get"><input type="hidden" name="method" value="setVCard"><input type="hidden" name="me">
+<table width="100%">
+<tr valign="top">
+    <td><fieldset>
+      <legend>Name</legend>
+      <table>
+          <tr><th nowrap>Full Name:</th><td width="100%"><input type=text name="FN" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Family Name:</th><td width="100%"><input type=text name="FAMILY" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Name:</th><td width="100%"><input type=text name="GIVEN" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Nickname:</th><td width="100%"><input type=text name="NICKNAME" class="vcardBoxEditable"></td></tr>
+      </table>
+    </fieldset></td>
+
+    <td><fieldset>
+      <legend>Communication</legend>
+      <table>
+          <tr><th nowrap>E-mail:</th><td width="100%"><input type=text name="EMAIL" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Web Site:</th><td width="100%"><input type=text name="URL" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Office Phone:</th><td width="100%"><input type=text name="VOICE_WORK" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Office Mobile:</th><td width="100%"><input type=text name="CELL_WORK" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Home Phone:</th><td width="100%"><input type=text name="VOICE_HOME" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Home Mobile:</th><td width="100%"><input type=text name="CELL_HOME" class="vcardBoxEditable"></td></tr>
+      </table>
+    </fieldset></td>
+</tr>
+<tr valign="top">
+    <td><fieldset>
+      <legend>Address</legend>
+      <table>
+          <tr><th nowrap>Address:</th><td width="100%"><input type=text name="STREET" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>City:</th><td width="100%"><input type=text name="LOCALITY" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>State:</th><td width="100%"><input type=text name="REGION" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Postal Code:</th><td width="100%"><input type=text name="PCODE" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Country:</th><td width="100%"><input type=text name="CTRY" class="vcardBoxEditable"></td></tr>
+      </table>
+    </fieldset></td>
+
+    <td><fieldset>
+      <legend>Organization</legend>
+      <table>
+          <tr><th nowrap>Name:</th><td width="100%"><input type=text name="ORGNAME" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Unit:</th><td width="100%"><input type=text name="ORGUNIT" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Title:</th><td width="100%"><input type=text name="TITLE" class="vcardBoxEditable"></td></tr>
+      </table>
+      </fieldset>
+     </td>
+</tr>
+<tr>
+<td colspan="2" align="right">
+	<div id="savebutton"><button onClick="saveVCARD()">Save Changes</button></div>
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>

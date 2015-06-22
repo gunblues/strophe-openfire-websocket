@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="WebSocketsPlugin" default="war">
+	<description>WebSockets Plugin Build</description>
+    <property name="openfire.home" value="/home/ubuntu/openfire_project/openfire_src/target/openfire" />
+	
+    <property name="WebSocketsPlugin.dir" value="/home/ubuntu/openfire_project/strophe-openfire-websocket/openfire-websockets" />
+
+	<path id="build.classpath">
+		<fileset dir="${WebSocketsPlugin.dir}\plugin\WEB-INF\lib" includes="*.jar"/>
+		<fileset dir="${WebSocketsPlugin.dir}\plugin\lib" includes="*.jar"/>		
+		<fileset dir="${openfire.home}\lib" includes="openfire.jar"/>
+		<fileset dir="${openfire.home}\lib" includes="servlet-api.jar"/>
+	</path>
+
+	<target name="init">
+		<!-- create our directories -->
+		<mkdir dir="${WebSocketsPlugin.dir}\build\classes"/>
+	</target>
+	
+	<target name="clean">
+        <delete dir="${WebSocketsPlugin.dir}\build\classes\com"/>       
+        <delete file="${openfire.home}\plugins\websockets.war"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac debug="true" deprecation="true" srcdir="${WebSocketsPlugin.dir}\src" destdir="${WebSocketsPlugin.dir}\build\classes">
+			<classpath refid="build.classpath"/>
+		</javac>
+	</target>
+
+	<target name="jar" depends="clean, compile">
+		<jar destfile="${WebSocketsPlugin.dir}\plugin\lib\websockets.jar">
+			<fileset dir="${WebSocketsPlugin.dir}\build\classes">
+				<include name="**" />
+			</fileset>
+		</jar>	
+		<jar destfile="${WebSocketsPlugin.dir}\plugin\WEB-INF\lib\websockets.jar">
+			<fileset dir="${WebSocketsPlugin.dir}\build\classes">
+				<include name="**" />
+			</fileset>
+		</jar>		
+	</target>
+	
+	<target name="war" depends="jar">
+		<jar destfile="${openfire.home}\plugins\websockets.war">
+			<fileset dir="${WebSocketsPlugin.dir}\plugin">
+				<include name="**" />
+			</fileset>
+		</jar>
+	</target>
+</project>
+

@@ -1,0 +1,492 @@
+/* CSS for Jive SparkWeb created by Jive Software - www.jivesoftware.com */
+
+/* Internet Explorer 6 PNG Hack -------------------------------------------------- */ 
+/* hack to provide proper PNG behavior in IE without Javascript */
+img, div, p, input, span, li, a { 
+	behavior: url(../iepngfix.htc); 
+}
+
+/* Basic Elements ---------------------------------------------------------------- */
+* { margin: 0px; padding: 0px; }
+
+html, body {
+	height: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+	background: #cd671d url(../images/login/backgrounds/bg_body.gif) repeat-x left top;
+	margin: 0px;
+	font-size: 76%; /* for more accurate font sizing across browsers */
+	}
+p {	}
+h1, h2, h3 {
+	}
+a:link, a:visited, a:hover, a:active {
+}
+a:link {
+	text-decoration: underline;
+	color: #fffcab;
+	}
+a:visited {
+	color: #fffcab;
+	}
+a:hover {
+	text-decoration: none;
+	color: #fffcab;
+	}
+a:active {
+	color: #fffcab;
+}
+acronym {
+	border: none;
+	}
+	
+/* Forcing the Footer to the bottom */
+* html #jive_sw_footer-container {
+	margin: -91px 0 0 0;
+	}
+* html #jive_sw_container {
+	height: 100%;
+	}
+#jive_sw_container {
+	min-height:100%;
+}
+	
+/* .clearer is used to aid in the proper clearing of floats within nested divs. More info can be found at sitepoint.com in
+the forums at http://www.sitepoint.com/forums/showthread.php?t=171943 */
+.clearer {
+	clear: both;
+	height: 1px;
+	overflow: hidden;
+	margin-top: -1px; 
+}	
+
+/* Page Structure ---------------------------------------------------------------------- */
+#jive_sw_container {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 0 0 0;
+	display: block;
+}
+
+/* User Bar Layout */
+#jive_sw_userbar-container {
+	background: #FFFFFF;
+	height: 52px;
+	width: 100%;
+	border-bottom: 2px solid #000;
+}
+#jive_sw_userbar {
+	height: 52px;
+	width: 100%;
+	position: relative;
+}
+#jive_sw_userbar-username {
+	height: 52px;
+	width: 285px;
+	float: left;
+}
+#user-search-form {
+	float: right;
+	width: 210px;
+	margin: 15px 0px 0px 0px;
+	}
+#user-search-form p {
+	float: left;
+	display: block;
+	width: 150px;
+	margin: 0px 5px 0px 0px;
+	}
+#user-search-form input {
+	width: 100px;
+	border: #333333 1px solid;
+	padding: 2px;
+	}
+#user-search-form input#user-search-submit {
+	width: 50px;
+	float: left;
+	background: #333;
+	color: #fff;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #ccc;
+	font-size: .9em;	
+	margin: 0px 5px 0px 0px;
+}
+
+/* Login and Account Creation Layout */
+#jive_sw_login-container {
+	width: 640px;
+	margin: 0 auto;
+	padding: 150px 0 0 0;
+}
+#jive_sw_login-top {
+	padding: 0px 0px 0px 45px;
+	background: url(../images/login/backgrounds/bg_LoginTop-Button.png) no-repeat left bottom;
+	width: 640px;
+	position: relative;
+	z-index: 2;
+}
+#jive_sw_login-top-plain {
+	width: 595px;
+	height: 45px;
+	padding: 0px 0px 20px 45px;
+	background: url(../images/login/backgrounds/bg_LoginTop-NoButton.png) no-repeat left bottom;
+	position:relative;
+}
+#jive_sw_login-bottom {
+	width: 640px;
+	background-image: url(../images/login/backgrounds/bg_Login-Bottom.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	height: 11px;
+	padding: 30px 0px 0px;
+	position: relative;
+}
+#jive_sw_login, #jive_sw_accountcreation {
+	background-image: url(../images/login/backgrounds/bg_LoginBody.png);
+	width: 520px;
+	padding: 30px 60px 0px;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+}
+#jive_sw_login {
+	padding-bottom: 30px;
+}
+
+#jive_loader {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#jive_sw_accountcreation {
+	padding-bottom: 10px;
+}
+
+/* Footer Layout */
+#jive_sw_footer-container {
+	background: url(../images/login/backgrounds/bg_Footer.png) repeat-x left bottom;
+	position: relative;
+	width: 100%;
+	height: 91px;
+	left: 0;
+	bottom: 0;
+	margin: -91px 0 0 0;
+}
+#jive_sw_footer {
+	width: 100%;
+	margin: 0 auto;
+	padding: 65px 0px 0px;
+}
+
+
+/* Images ---------------------------------------------------------------------------------- */
+
+/* This is courtesy of Seamus Leahy - http://moronicbajebus.com/wordpress/wp-content/cssplay/image-replacement/ */
+#jive_sw_login h1#logo,  #jive_sw_accountcreation h1#logo {
+	/*Size of the image*/ padding-top: 77px;
+	width: 277px;
+	/*The image*/ background-image: url(../images/login/logo_SparkWeb-large.gif);
+	background-repeat: no-repeat;
+	/*Hide the text*/ overflow: hidden;
+		margin-bottom: 25px;
+	/* WIN IE5 hack */ height: 0;
+	voice-family: "\"}\"";
+	voice-family:inherit;
+	height: 0;
+}
+
+/* Create Account Button on the Login Screen */
+#jive_sw_login-container p.btn-create-account, #jive_sw_login-container p.btn-create-account-depressed {
+	position: relative;
+	display: block;
+	left: 416px;
+	width: 143px;
+	height: 43px;
+	margin: 0px;
+	padding: 0px;
+	top: 18px;
+	z-index: 2;
+}
+#jive_sw_login-container p.btn-create-account a, #jive_sw_login-container p.btn-create-account-depressed a {
+	height: 32px;
+	width: 143px;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	padding-top: 11px;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+#jive_sw_login-container p.btn-create-account a:link { background: url(../images/login/buttons/btn_Large.gif) no-repeat center top; }
+#jive_sw_login-container p.btn-create-account a:visited { background: url(../images/login/buttons/btn_Large.gif) no-repeat center top; }
+#jive_sw_login-container p.btn-create-account a:hover { background: url(../images/login/buttons/btn_Large.gif) no-repeat center -43px; }
+#jive_sw_login-container p.btn-create-account a:active { background: url(../images/login/buttons/btn_Large.gif) no-repeat center -86px; }
+
+/* Create Account Button on the Create Account Screen */
+#jive_sw_login-container p.btn-create-account-depressed a:link { background: url(../images/login/buttons/btn_Large.gif) no-repeat center -129px; }
+#jive_sw_login-container p.btn-create-account-depressed a:visited {	background: url(../images/login/buttons/btn_Large.gif) no-repeat center -129px; }
+#jive_sw_login-container p.btn-create-account-depressed a:hover { background: url(../images/login/buttons/btn_Large.gif) no-repeat center -86px; }
+#jive_sw_login-container p.btn-create-account-depressed a:active { background: url(../images/login/buttons/btn_Large.gif) no-repeat center -86px; }
+
+/* Images in the User Bar */
+#jive_sw_userbar img.logo {
+	margin: 0px 15px;
+	display: block;
+	float: left;
+	height: 52px;
+	width: 148px;
+}
+#jive_sw_userbar img.avatar {
+	width: 35px;
+	height: 35px;
+	margin: 8px 15px 0px 0px;
+	float: left;
+	clear: right;
+	display: block;
+}
+
+/* Link Styles --------------------------------------------------------------------------- */
+#jive_sw_login a:link, #jive_sw_userbar a:link, #jive_sw_accountcreation a:link { color: #FC891D; }
+#jive_sw_login a:visited, #jive_sw_userbar a:visited, #jive_sw_accountcreation a:visited { color: #FDA555; }
+#jive_sw_login a:hover, #jive_sw_userbar a:hover, #jive_sw_accountcreation a:hover { color: #FC891D; text-decoration: none; }
+#jive_sw_login a:active, #jive_sw_userbar a:active, #jive_sw_accountcreation a:active {	color: #FFAE1A;	text-decoration: none; }
+
+
+/* Text Styles ---------------------------------------------------------------------------- */
+/* Colors */
+.jive_red {
+	color: #FF0000;
+}
+/* Text for User Bar */
+#jive_sw_userbar h1 {
+	font-size: 1em;
+	font-weight: bold;
+	color: #000;
+	display: block;
+	padding-top: 11px;
+}
+#jive_sw_userbar p {
+	font-size: 0.9em;
+	color: #000;
+	display: block;
+}
+#jive_sw_userbar #version {
+	color: #FEBC1D;
+	font-size: 0.8em;
+	position: absolute;
+	display: block;
+	width: 90px;
+	text-align: right;
+	height: 0.75em;
+	left: 42px;
+	top: 32px;
+}
+
+/* Text for Login and Create Account Screens */
+#jive_sw_login-top p {
+	display: block;
+	color: #FFFFFF;
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	width: 400px;
+	top: 15px;
+}
+#jive_sw_login-top-plain p {
+	display: block;
+	width: 553px;
+	color: #FFFFFF;
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 0px;
+	padding: 0px 0px 30px;
+}
+#jive_sw_login p, #jive_sw_accountcreation p {
+	width: 514px;
+	font-size: 1em;
+	line-height: 1.5em;
+	float: left;
+	clear: left;
+	display: block;
+	margin: 0px 0px 15px;
+	padding: 0px;
+}
+#jive_sw_login p.version, #jive_sw_accountcreation p.version {
+	color: #FEBC1D;
+	font-size: 0.75em;
+	display: block;
+	position: absolute;
+	text-align: right;
+	top: 80px;
+	right: 304px;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	
+}
+#jive_sw_login p.error, #jive_sw_accountcreation p.error {
+	clear: left;
+	float: left;
+	width: 400px;
+}
+#jive_sw_login p.alert, #jive_sw_accountcreation p.alert {
+	clear: left;
+	float: left;
+	background: url(../images/login/icons/warning.png) no-repeat left center;
+	width: 360px;
+	display: block;
+	margin: 20px 0px 0px 85px;
+	padding: 0px 0px 0px 50px;
+}
+#jive_sw_login p a.small-link, #jive_sw_accountcreation p a.smalllink {
+	font-size: .9em;
+	width: 145px;
+	height: 10px;
+	display: block;
+}
+#jive_sw_login-bottom p {
+	text-align: right;
+	color: #FFFFFF;
+	font-size: 0.9em;
+	padding: 0 33px 0 0;
+}
+
+/* Footer Text */
+#jive_sw_footer p.jive_sw_footer-left {
+	color: #FFFFFF;
+	float: left;
+	width: 474px;
+	font-size: .8em;
+	display: block;
+	margin: 0px 0px 0px 20px;
+}
+#jive_sw_footer p.jive_sw_footer-right {
+	font-size: .8em;
+	color: #FFFFFF;
+	float: right;
+	width: 100px;
+	text-align: right;
+	display: block;
+	margin: 0px 20px 0px 0px;
+}
+#jive_sw_footer p {
+	color: #FFFFFF;
+	font-size: .8em;
+	display: block;
+	margin: 0px;
+	text-align: center;
+}
+
+
+
+/* List Styles --------------------------------------------------------------------------- */
+#jive_sw_userbar ul {
+	width: 50px;
+	float: right;
+	list-style: none;
+	text-align: right;
+	height: 52px;
+	display: block;
+	margin: 0px 20px 0px 15px;
+	}
+#jive_sw_userbar li {
+	display: inline;
+	line-height: 52px;
+}
+#jive_sw_userbar li a {
+}
+#jive_sw_userbar li a:link {
+}
+#jive_sw_userbar li a:visited {
+}
+#jive_sw_userbar li a:hover {
+}
+#jive_sw_userbar li a:active {
+}
+
+
+/* Forms --------------------------------------------------------------------------------- */
+/* Login Form */
+#jive_sw_login form, #jive_sw_accountcreation form {
+	display: block;
+	clear: left;
+	padding-left: 85px;
+	width: 429px;
+	float: left;
+}
+#jive_sw_login form p {
+	display: block;
+	width: 145px;
+	height: 40px;
+	padding: 0px 15px 15px 0px;
+	color: #000;
+	float: left;
+	clear: none;
+	margin: 0px;
+}
+#jive_sw_login form p.smallbutton, #jive_sw_accountcreation form p.smallbutton {
+	width: 52px;
+}
+#jive_sw_login input.smallbutton, #jive_sw_accountcreation input.smallbutton {
+	background: url(../images/login/buttons/btn_Small.gif) no-repeat left top;
+	height: 25px;
+	width: 52px;
+	border: none;
+	color: #FFFFCC;
+	font-weight: bold;
+	font-size: 1em;
+	padding: 0px;
+	margin-top: 16px;
+}
+#jive_sw_login input.smallbutton:hover, #jive_sw_accountcreation input.smallbutton:hover {
+	background: url(../images/login/buttons/btn_Small.gif) no-repeat left -25px;
+}
+#jive_sw_login input.smallbutton:active, #jive_sw_accountcreation input.smallbutton:active {
+	background: url(../images/login/buttons/btn_Small.gif) no-repeat left -50px;
+}
+#jive_sw_login form label, #jive_sw_accountcreation form label {
+	font-weight:bold;
+	font-size: 1em;
+	display: block;
+	margin: 0 0 3px 0;
+}
+#jive_sw_login form input, #jive_sw_accountcreation form input {
+	width: 145px;
+	border: 1px solid #000;
+	height: 18px;
+}
+
+/* Create Account Form */
+form#jive_sw_account-creation-form p {
+	display:block;
+	width: 170px;
+	height: 40px;
+	padding: 0px 15px 15px 0px;
+	color: #000;
+	float: left;
+	clear: none;
+	margin: 0px;
+}
+form#jive_sw_account-creation-form input {
+	border: 1px solid #000;
+	width: 170px;
+}
+form#jive_sw_account-creation-form p.smallbutton {
+	width: 52px;
+	margin-top: -15px;
+}
+form#jive_sw_account-creation-form input.smallbutton {
+}
+#jive_sw_login form input.error {
+	border: 1px solid #FF0000;
+}
+
+/* Hiding stuff while we're logging in */
+#jive_sw_login.jive-login-hidden *{
+	display: none;
+}

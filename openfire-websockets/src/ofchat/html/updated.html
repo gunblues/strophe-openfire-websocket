@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OfChat</title>
+<meta charset="utf-8">
+<style type="text/css">
+body {
+    background: #eee;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#header {
+    font-size: 26px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 48px;
+    background: url(../icon48.gif) no-repeat left center;
+    padding-left: 60px;
+    margin: 30px 0 30px 30px;
+    color: #333333;
+}
+
+#content {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#inner {
+    margin-left: 30px;
+}
+
+</style>
+</head>
+<body>
+<div id="content">
+    <h1 id="header">OfChat Changelog</h1>
+
+    <div id="inner">
+		<h3>0.0.0.9</h3>
+        <ul>
+            <li>New: Added support for Jingle Audio/Video using WebRTC JSEP</li>
+            <li>Changed: Fixed various faults</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.8</h3>
+        <ul>
+            <li>New: Added support for Jingle Audio/Video using WebRTC Roap</li>
+            <li>Changed: Removed support for Redfire</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.7</h3>
+        <ul>
+            <li>Fixed: Quotes replaced with escape characters in chat message</li>
+            <li>Fixed: Reconnection failure creating "Authenticating.." message</li>
+            <li>Fixed: Accept incoming messages from federated users not on roster</li>
+            <li>Fixed: Notifications for group chat</li>
+            <li>Fixed: Accept broadcasts messages (no chat type) from components or server</li>
+            <li>New: Added support for editing/viewing vCards and Avatars (XEP-0054 and XEP-0153)</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.6</h3>
+        <ul>
+            <li>New. Added partial support for Redfire Plugin. Audio video in chat and groupchat. Compatible with Redfire Spark plugin</li>
+            <li>Changed: Added Boxy jQuery plugin for UI windowing, dialogs and alerts</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.5</h3>
+        <ul>
+            <li>New. Added partial support for XEP-0100 Gateways. Requires Kraken plugin</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.4</h3>
+        <ul>
+            <li>New. Added partial support for XEP-0136 Archiving. Requires OpenArchive plugin</li>
+            <li>New. Added partial support for XEP-0045 MUC. Requires Openfire client management plugin</li>
+         </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.3</h3>
+        <ul>
+            <li>Fixed. Added missing enable/disable icons</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.2</h3>
+        <ul>
+            <li>Changed. Minimal Chrome version down-graded to 14 for OSX</li>
+            <li>Fixed. Filter for smilies removing HTML tags</li>
+        </ul>
+    </div>
+
+    <div id="inner">
+		<h3>0.0.0.1</h3>
+        <ul>
+            <li>New. Project cloned from Gtalklet by Sean Zheng</li>
+            <li>New. Added Strophe Openfire.Connection class for Openfire WebSocket plugin</li>
+            <li>Changed. Handled contact's first &lt;presence&gt; arriving before get roster response</li>
+            <li>Changed. Handled both 2way subscription expected by Openfire</li>
+            <li>Changed. Added avatars</li>
+            <li>Changed. Added emtional icons (smilies)</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

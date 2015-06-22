@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<load>
+    <profile-default>standard</profile-default>
+    <profile name="standard">
+        <file name="basic-dialog.css"/>
+        <file name="grid.css"/>
+        <file name="layout.css"/>
+        <file name="menu.css"/>
+        <file name="resizable.css"/>
+        <file name="tabs.css"/>
+        <file name="toolbar.css"/>
+        <file name="login.css"/>
+        <file name="spank.css"/>
+    </profile>
+    <profile name="error">
+        <file name="login.css"/>
+        <file name="spank.css"/>
+    </profile>
+</load>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OfChat vCard</title>
+<meta charset="utf-8">
+<style type="text/css">
+body {
+    background: #eee;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#header {
+    font-size: 26px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 48px;
+    background: url(../icon48.gif) no-repeat left center;
+    padding-left: 60px;
+    margin: 30px 0 30px 30px;
+    color: #333333;
+}
+
+#content {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#inner {
+    margin-left: 30px;
+}
+
+</style>
+<script language="JavaScript">
+	var userJID, userId, userName, update, backgroundPage, threadId, messages, defaultAvatar
+
+	function getParameter(string, parm, delim) {
+
+		 if (string.length == 0) {
+			return '';
+		 }
+
+		 var sPos = string.indexOf(parm + "=");
+
+		 if (sPos == -1) {return '';}
+
+		 sPos = sPos + parm.length + 1;
+		 var ePos = string.indexOf(delim, sPos);
+
+		 if (ePos == -1) {
+			ePos = string.length;
+		 }
+
+		 return unescape(string.substring(sPos, ePos));
+	}
+
+	function getPageParameter(parameterName, defaultValue) {
+
+		var s = self.location.search;
+
+		if ((s == null) || (s.length < 1)) {
+			return defaultValue;
+		}
+
+		s = getParameter(s, parameterName, '&');
+
+		if ((s == null) || (s.length < 1)) {
+			s = defaultValue;
+		}
+
+		return s;
+	}
+
+	function weAreReady()
+	{
+		userJID = getPageParameter('user', null);
+		threadId = getPageParameter('thread', null);
+		defaultAvatar = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD26p7K0ub2byrWF5X77RwPcntUFeg+CYok0CJozkyMzP8A72cfyAoA4vUdLv8ATz/pVuyr2ccr+YqlXquowQXFlLDcKDEyHdn09a8qFAB7V3/hDS7vTrVjczACXDCED7pwOp9exHtXOeCbbz9cSQ42wIXOfXoP55/CvQaAM/xBZXF/pkltbziJnxnI4YZ6E9hXm1xDLbzvBMhSRDhga9Zrj/iFaAG3vgef9Uw/Mj+tAH//2Q==";
+
+		if (userJID != null)
+		{
+			userId = userJID.split("@")[0];
+			document.title = "OfChat - " + userId;
+			document.getElementById("header").innerHTML = userId;
+
+			backgroundPage = chrome.extension.getBackgroundPage();
+
+			if (backgroundPage != null)
+			{
+				if (threadId == null)	// my profile vcard (editable)
+				{
+					userName = backgroundPage.state.user.name || userId;
+					avatar = backgroundPage.state.user.avatar == "data:;base64," ? defaultAvatar : backgroundPage.state.user.avatar;
+
+					document.getElementById("savebutton").style.display = "inline";
+					document.getElementById("avatarEdit").style.display = "inline";
+					document.getElementById("historyTitle").style.display = "none";
+
+					document.getElementById("FN").value = userName;
+					document.getElementById("BINVAL").value = avatar;
+
+					document.getElementById("FAMILY").value = backgroundPage.state.user.family || "";
+					document.getElementById("GIVEN").value = backgroundPage.state.user.given || "";
+					document.getElementById("MIDDLE").value = backgroundPage.state.user.middle || "";
+					document.getElementById("NICKNAME").value = backgroundPage.state.user.nickname || "";
+
+					document.getElementById("EMAIL").value = backgroundPage.state.user.email || "";
+					document.getElementById("URL").value = backgroundPage.state.user.url || "";
+
+					document.getElementById("VOICE_WORK").value = backgroundPage.state.user.workPhone || "";
+					document.getElementById("VOICE_HOME").value = backgroundPage.state.user.homePhone || "";
+					document.getElementById("CELL_WORK").value = backgroundPage.state.user.workMobile || "";
+					document.getElementById("CELL_HOME").value = backgroundPage.state.user.homeMobile || "";
+
+					document.getElementById("STREET").value = backgroundPage.state.user.street || "";
+					document.getElementById("LOCALITY").value = backgroundPage.state.user.locality || "";
+					document.getElementById("REGION").value = backgroundPage.state.user.region || "";
+					document.getElementById("PCODE").value = backgroundPage.state.user.pcode || "";
+					document.getElementById("CTRY").value = backgroundPage.state.user.country || "";
+
+					document.getElementById("ORGNAME").value = backgroundPage.state.user.orgName || "";
+					document.getElementById("ORGUNIT").value = backgroundPage.state.user.orgUnit || "";
+					document.getElementById("TITLE").value = backgroundPage.state.user.title || "";
+
+				} else {	// contact vcard
+
+					userName = backgroundPage.state.user.contacts[userJID].name || userId;
+					avatar = backgroundPage.state.user.contacts[userJID].avatar == "data:;base64," ? defaultAvatar : backgroundPage.state.user.contacts[userJID].avatar;
+
+					if (backgroundPage.state.user.contacts[userJID].room)
+					{
+						document.getElementById("VCARD").style.display = "none";
+
+					} else {
+
+						document.getElementById("FAMILY").value = backgroundPage.state.user.contacts[userJID].family || "";
+						document.getElementById('FAMILY').disabled = true;
+						document.getElementById("FN").value = backgroundPage.state.user.contacts[userJID].name || "";
+						document.getElementById('FN').disabled = true;
+						document.getElementById("GIVEN").value = backgroundPage.state.user.contacts[userJID].given || "";
+						document.getElementById('GIVEN').disabled = true;
+						document.getElementById("MIDDLE").value = backgroundPage.state.user.contacts[userJID].middle || "";
+						document.getElementById('MIDDLE').disabled = true;
+						document.getElementById("NICKNAME").value = backgroundPage.state.user.contacts[userJID].nickname || "";
+						document.getElementById('NICKNAME').disabled = true;
+
+						document.getElementById("EMAIL").value = backgroundPage.state.user.contacts[userJID].email || "";
+						document.getElementById('EMAIL').disabled = true;
+						document.getElementById("URL").value = backgroundPage.state.user.contacts[userJID].url || "";
+						document.getElementById('URL').disabled = true;
+
+						document.getElementById("VOICE_WORK").value = backgroundPage.state.user.contacts[userJID].workPhone || "";
+						document.getElementById('VOICE_WORK').disabled = true;
+						document.getElementById("VOICE_HOME").value = backgroundPage.state.user.contacts[userJID].homePhone || "";
+						document.getElementById('VOICE_HOME').disabled = true;
+						document.getElementById("CELL_WORK").value = backgroundPage.state.user.contacts[userJID].workMobile || "";
+						document.getElementById('CELL_WORK').disabled = true;
+						document.getElementById("CELL_HOME").value = backgroundPage.state.user.contacts[userJID].homeMobile || "";
+						document.getElementById('CELL_HOME').disabled = true;
+
+						document.getElementById("STREET").value = backgroundPage.state.user.contacts[userJID].street || "";
+						document.getElementById('STREET').disabled = true;
+						document.getElementById("LOCALITY").value = backgroundPage.state.user.contacts[userJID].locality || "";
+						document.getElementById('LOCALITY').disabled = true;
+						document.getElementById("REGION").value = backgroundPage.state.user.contacts[userJID].region || "";
+						document.getElementById('REGION').disabled = true;
+						document.getElementById("PCODE").value = backgroundPage.state.user.contacts[userJID].pcode || "";
+						document.getElementById('PCODE').disabled = true;
+						document.getElementById("CTRY").value = backgroundPage.state.user.contacts[userJID].country || "";
+						document.getElementById('CTRY').disabled = true;
+
+						document.getElementById("ORGNAME").value = backgroundPage.state.user.contacts[userJID].orgName || "";
+						document.getElementById('ORGNAME').disabled = true;
+						document.getElementById("ORGUNIT").value = backgroundPage.state.user.contacts[userJID].orgUnit || "";
+						document.getElementById('ORGUNIT').disabled = true;
+						document.getElementById("TITLE").value = backgroundPage.state.user.contacts[userJID].title || "";
+						document.getElementById('TITLE').disabled = true;
+
+					}
+
+					messages = backgroundPage.state.user.contacts[userJID].messages;
+					var text = "";
+
+					for (index in messages)
+					{
+						if (messages[index].from == userJID)
+						{
+							var who = "me:"
+							var color = "green";
+
+						} else {
+
+							var who = "you:"
+							var color = "blue";
+						}
+
+						var date = new Date(messages[index].timestamp);
+						var month = date.getMonth() + 1
+						var day = date.getDate()
+						var year = date.getFullYear()
+						var hours = date.getHours()
+						var minutes = date.getMinutes()
+
+						if (messages[index].prototype != "prototype")
+							text = text + "<font color='" + color + "'>" + month + "/" + day + "/" + year + ":" + hours + ":" + minutes + "   " + who + " " + messages[index].content + "</font><br/>"
+					}
+
+					document.getElementById("history").innerHTML = text;
+				}
+
+				document.title = "OfChat - " + userName;
+				document.getElementById("header").innerHTML = userName;
+				document.getElementById("avatar").innerHTML = "<img src='" + avatar + "'/>";
+
+			}
+		}
+	}
+
+	function updateAvatar()
+	{
+		if (document.getElementById("avatarEdit").value == "Edit")
+		{
+			document.getElementById("avatarEdit").value = "Update";
+			document.getElementById("BINVAL").style.display = "inline";
+
+		} else {
+
+			document.getElementById("avatar").innerHTML = "<img src='" + document.getElementById("BINVAL").value + "'/>";
+			document.getElementById("BINVAL").style.display = "none";
+			document.getElementById("avatarEdit").value = "Edit";
+		}
+	}
+
+	function saveVCARD()
+	{
+		if (backgroundPage != null)
+		{
+			backgroundPage.state.user.name 			= document.getElementById("FN").value;
+			backgroundPage.state.user.avatar 		= document.getElementById("BINVAL").value;
+
+			backgroundPage.state.user.family		= document.getElementById("FAMILY").value;
+			backgroundPage.state.user.given 		= document.getElementById("GIVEN").value;
+			backgroundPage.state.user.middle 		= document.getElementById("MIDDLE").value;
+			backgroundPage.state.user.nickname 		= document.getElementById("NICKNAME").value;
+
+			backgroundPage.state.user.email 		= document.getElementById("EMAIL").value;
+			backgroundPage.state.user.url			= document.getElementById("URL").value;
+
+			backgroundPage.state.user.workPhone 	= document.getElementById("VOICE_WORK").value;
+			backgroundPage.state.user.homePhone 	= document.getElementById("VOICE_HOME").value;
+			backgroundPage.state.user.workMobile	= document.getElementById("CELL_WORK").value;
+			backgroundPage.state.user.homeMobile	= document.getElementById("CELL_HOME").value;
+
+			backgroundPage.state.user.street		= document.getElementById("STREET").value;
+			backgroundPage.state.user.locality 		= document.getElementById("LOCALITY").value;
+			backgroundPage.state.user.region		= document.getElementById("REGION").value;
+			backgroundPage.state.user.pcode			= document.getElementById("PCODE").value;
+			backgroundPage.state.user.country		= document.getElementById("CTRY").value;
+
+			backgroundPage.state.user.orgName		= document.getElementById("ORGNAME").value;
+			backgroundPage.state.user.orgUnit	 	= document.getElementById("ORGUNIT").value;
+			backgroundPage.state.user.title			= document.getElementById("TITLE").value;
+
+			backgroundPage.features['xmpp'].updateVCard();
+
+			window.close();
+		}
+	}
+
+
+</script>
+</head>
+<body onload="weAreReady()">
+<div id="content">
+<h1 id="header"></h1><table><tr valign='top'><td><span id="avatar"></span></td><td><textarea style='display:none;height:300px;width:600px;' id='BINVAL'></textarea></td><td><input style='display:none' id='avatarEdit' type='button' onclick='updateAvatar()' value='Edit'></td></tr></table>
+<div id="VCARD">
+<input type="hidden" id="method" value="setVCard"><input type="hidden" id="me">
+<table width="100%">
+<tr valign="top">
+    <td><fieldset>
+      <legend>Name</legend>
+      <table>
+          <tr><th nowrap>Full Name:</th><td width="100%"><input type=text id="FN" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Family Name:</th><td width="100%"><input type=text id="FAMILY" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Given:</th><td width="100%"><input type=text id="GIVEN" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Middle:</th><td width="100%"><input type=text id="MIDDLE" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Nickname:</th><td width="100%"><input type=text id="NICKNAME" class="vcardBoxEditable"></td></tr>
+      </table>
+    </fieldset></td>
+
+    <td><fieldset>
+      <legend>Communication</legend>
+      <table>
+          <tr><th nowrap>E-mail:</th><td width="100%"><input type=text id="EMAIL" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Web Site:</th><td width="100%"><input type=text id="URL" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Office Phone:</th><td width="100%"><input type=text id="VOICE_WORK" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Office Mobile:</th><td width="100%"><input type=text id="CELL_WORK" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Home Phone:</th><td width="100%"><input type=text id="VOICE_HOME" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Home Mobile:</th><td width="100%"><input type=text id="CELL_HOME" class="vcardBoxEditable"></td></tr>
+      </table>
+    </fieldset></td>
+</tr>
+<tr valign="top"><td colspan="2">&nbsp;</td></tr>
+<tr valign="top">
+    <td><fieldset>
+      <legend>Address</legend>
+      <table>
+          <tr><th nowrap>Address:</th><td width="100%"><input type=text id="STREET" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>City:</th><td width="100%"><input type=text id="LOCALITY" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>State:</th><td width="100%"><input type=text id="REGION" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Postal Code:</th><td width="100%"><input type=text id="PCODE" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Country:</th><td width="100%"><input type=text id="CTRY" class="vcardBoxEditable"></td></tr>
+      </table>
+    </fieldset></td>
+
+    <td><fieldset>
+      <legend>Organization</legend>
+      <table>
+          <tr><th nowrap>Name:</th><td width="100%"><input type=text id="ORGNAME" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Unit:</th><td width="100%"><input type=text id="ORGUNIT" class="vcardBoxEditable"></td></tr>
+          <tr><th nowrap>Title:</th><td width="100%"><input type=text id="TITLE" class="vcardBoxEditable"></td></tr>
+      </table>
+      </fieldset>
+     </td>
+</tr>
+<tr valign="top"><td colspan="2"></td></tr>
+<tr>
+<td colspan="2" align="left">
+	<div id="savebutton" style="display:none"><input type='button' onclick="saveVCARD()" value="Save Changes"/></div><input type='button' onclick="window.close()" value="Exit"/>
+</td>
+</tr>
+</table>
+</div>
+<h2 id='historyTitle'>History</h2>
+<div id='history'></div>
+</div>
+</body>
+</html>
