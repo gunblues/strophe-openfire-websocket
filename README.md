@@ -89,5 +89,5 @@ Note: if you want to connect openfire directly, just skip this step
 * Checkout strophe-openfire-websocket.js and include strophe-openfire-websocket.js to your html
 * Add the code below to your js
 ```html
-    new conn = new Openfire.Connection("ws://yourOpenfireServer:7070/ws/server");
+    var conn = new Openfire.Connection("ws://yourOpenfireServer:7070/ws/server");
 ```
