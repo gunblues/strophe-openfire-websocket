@@ -309,7 +309,7 @@ public final class XMPPServlet extends WebSocketServlet
             {
                 try {
                 	Log.debug( digest + " : Delivered : " + packet );
-                	wsSession.getRemote().sendString(packet);
+                	wsSession.getRemote().sendStringByFuture(packet);
                 } catch (Exception e) {
                     Log.error("XMPPWebSocket deliver " + e);
                 }
