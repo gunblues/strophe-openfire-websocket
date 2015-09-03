@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="WebSocketsPlugin" default="war">
 	<description>WebSockets Plugin Build</description>
-    <property name="openfire.home" value="/home/ubuntu/openfire_project/openfire_src/target/openfire" />
+    <property name="openfire.home" value="/home/kevinhsiao/Openfire/target/openfire" />
 	
-    <property name="WebSocketsPlugin.dir" value="/home/ubuntu/openfire_project/strophe-openfire-websocket/openfire-websockets" />
+    <property name="WebSocketsPlugin.dir" value="/home/kevinhsiao/strophe-openfire-websocket/openfire-websockets" />
 
 	<path id="build.classpath">
 		<fileset dir="${WebSocketsPlugin.dir}\plugin\WEB-INF\lib" includes="*.jar"/>

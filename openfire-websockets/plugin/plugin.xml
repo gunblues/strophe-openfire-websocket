@@ -4,8 +4,8 @@
     <class>com.ifsoft.websockets.plugin.WebSocketsPlugin</class>
     <name>WebSockets Plugin</name>
     <description>WebSockets Plugin for Openfire</description>
-    <author>Ignite Realtime Community</author>
-    <version>0.0.0.9</version>
+    <author>Ignite Realtime Community (customize)</author>
+    <version>0.0.0.10</version>
     <minServerVersion>3.10.0</minServerVersion> 
 
 
