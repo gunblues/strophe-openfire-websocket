@@ -49,7 +49,6 @@ Note: if you want to connect openfire directly, just skip this step
         backend ws_backend
             balance source
             option forwardfor # This sets X-Forwarded-For
-            option httpclose
             timeout queue 86400000
             timeout server 86400000
             timeout connect 86400000
